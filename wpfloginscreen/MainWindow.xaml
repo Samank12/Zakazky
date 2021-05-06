@@ -1,6 +1,18 @@
 ﻿<Window x:Class="wpfloginscreen.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Tlumiče" Height="350" Width="525">
+        Title="Tlumiče" Height="350" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="KlientTpv_Icon.ico">
+    <StackPanel>
+        <Menu DockPanel.Dock="Top" Background="#FF6A297E" Foreground="#FFE8D6D6">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Manage users">
+                </MenuItem>
+                <MenuItem Header="_Show groups" IsCheckable="True" IsChecked="True" />
+            </MenuItem>
+        </Menu>
 
+    </StackPanel> 
 </Window>

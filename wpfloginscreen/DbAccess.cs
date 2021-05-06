@@ -24,7 +24,7 @@ namespace wpfloginscreen
         public static string GetConnStr() 
         {
 
-            return ConfigurationManager.ConnectionStrings["Zakazky"].ConnectionString;
+            return ConfigurationManager.ConnectionStrings["Zakazkypr"].ConnectionString;
         
         }
 
@@ -161,6 +161,45 @@ namespace wpfloginscreen
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+        public static DataSet ExecuteSelectProc (string kterou, SqlParameter[] parametry)
+        {
+            try
+            {
+
+                if (connection.State == ConnectionState.Closed)
+                {
+                    createConn();
+                }
+
+                //SqlConnection mySqlConnection = new SqlConnection("server=(local);database=MyDatabase;Integrated Security=SSPI;");
+
+                //SqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+                SqlCommand mySqlCommand = connection.CreateCommand();
+                mySqlCommand.CommandText = kterou;
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                // mySqlCommand.Parameters.Add("@IDCategory", SqlDbType.Int).Value = 5;
+                mySqlCommand.Parameters.AddRange(parametry);
+                
+                /*foreach (var item in parametry)
+                {
+                    
+                }
+                */
+                SqlDataAdapter mySqlDataAdapter = new SqlDataAdapter(mySqlCommand);
+               /* mySqlDataAdapter.SelectCommand = ;*/
+                DataSet myDataSet = new DataSet();
+                connection.Open();
+                mySqlDataAdapter.Fill(myDataSet);
+                return myDataSet;
+
+            }
+            catch (Exception ex) 
+            {
+
                 throw ex;
             }
         }
